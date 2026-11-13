@@ -38,10 +38,11 @@ class Tarefa:
         return tarefas_banco if tarefas_banco else []
 
     @staticmethod
-    def apagarTarefa():
+    def apagarTarefa(id_tarefa : int):
         sql = '''DELETE FROM tarefas WHERE id_tarefa = %s;'''
+        params = (id_tarefa,)
         with Database() as db:
-            db.executar(sql)
+            db.executar(sql, params)
         
     
 
