@@ -1,36 +1,28 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{  titulo_da_pagina  }}</title>
+    <title>{{ titulo_da_pagina }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Digite a tarefa e a data de conclusão (opcional): </h1>
-    
-    <form method="POST"> <!--seleciona o método HTTP -->
-        <input type="text" id="tituloTarefa" name="tituloTarefa" 
-               value="{{ tarefa_edit.titulo_tarefa if tarefa_edit else '' }}" required>
-               
-        <input type="date" id="dataConclusao" name="dataConclusao" 
-               value="{{ tarefa_edit.data_conclusao if tarefa_edit and tarefa_edit.data_conclusao else '' }}">
-        
-        <button type="submit">
-            {{ 'Salvar Alterações' if tarefa_edit else 'Adicionar' }}
-        </button>
-
-        {% if tarefa_edit %}
-            <a href="{{ url_for('home') }}">Cancelar</a>
-        {% endif %}
+    <h2>Digite a tarefa e a data de conclusão (opcional):</h2>
+ 
+    <form method="POST"> 
+        <input type="text" id="tituloTarefa" name="tituloTarefa" placeholder="O que precisa ser feito?" value="{{ tarefa_edicao.titulo if tarefa_edicao else '' }}" required>
+        <input type="date" id="dataConclusao" name="dataConclusao" value="{{ tarefa_edicao.data_conclusao if tarefa_edicao else '' }}">
+        <button type="submit">{{ 'Atualizar' if tarefa_edicao else 'Adicionar' }}</button>
     </form>
-
+   
     <ul id="listaTarefas">
         {% for tarefa in tarefas_da_pagina %}
             <li>
-                {{ tarefa.titulo_tarefa }} - {{ tarefa.data_conclusao }}
-                <a href="{{ url_for('edit', id=tarefa.id_tarefa) }}">Editar</a>
-                <a href="{{ url_for('apagar_id_especificado', id=tarefa.id_tarefa) }}">Apagar</a>
+                <span>{{ tarefa.titulo_tarefa }} - {{ tarefa.data_conclusao }}</span>
+                <div class="acoes-tarefa">
+                    <a href="{{ url_for('editar_tarefa', id=tarefa.id_tarefa) }}">Editar</a>
+                    <a href="{{ url_for('apagar_id_especificado', id=tarefa.id_tarefa) }}">Apagar</a>
+                </div>
             </li>
         {% endfor %}
     </ul>
