@@ -1,7 +1,8 @@
 from datetime import datetime
- 
+
 from tarefas.models.database import Database
- 
+
+
 class Tarefa:
     """Provê métodos para armazenar, recuperar e processar os dados das
     tarefas criadas a partir do formulário principal.
@@ -61,19 +62,6 @@ class Tarefa:
         
         with Database() as db:
             db.executar(sql, params)
-
-class Renomear:
-    def __init__(self, id,  n_titulo, n_data_conclusao = None ):
-        self.n_titulo = n_titulo
-        self.n_data_conclusao = n_data_conclusao
-
-    def Alterar():
-        sql = '''UPDATE nome_da_tabela
-                SET 
-                titulo_tarefa = '',
-                data_conclusao = 00:00:00
-                WHERE 
-                id = id;'''
 
 # Área 51 (testes)
 #tarefa = Tarefa('Minha nova tarefa')
