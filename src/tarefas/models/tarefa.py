@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 
 from tarefas.models.database import Database
 
@@ -47,10 +47,15 @@ class Tarefa:
         
         with Database() as db:
             resultado = db.executar(sql, params)
-            
+
         if resultado:
             dados = resultado[0]
-            return cls(titulo=dados['titulo_tarefa'], id=dados['id_tarefa'], data_conclusao=dados['data_conclusao'])
+            data_formatada = (
+                dados['data_conclusao'].strftime('%Y-%m-%d')
+                if isinstance(dados['data_conclusao'], (datetime, date))
+                else dados['data_conclusao']
+            )
+            return cls(titulo=dados['titulo_tarefa'], id=dados['id_tarefa'], data_conclusao=data_formatada)
         return None
 
     def atualizarTarefa(self):

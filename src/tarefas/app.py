@@ -41,6 +41,10 @@ def apagar_id_especificado(id):
     Tarefa.apagarTarefa(id)
     return redirect(url_for('home'))
 
+    """
+    No PHP: $_POST['id']
+    """
+
 @app.route('/edit/<int:id>', methods=['GET', 'POST'])
 def editar_tarefa(id):
     if request.method == 'POST':

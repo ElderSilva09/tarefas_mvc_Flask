@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h2>Digite a tarefa e a data de conclusão (opcional):</h2>
+    <h2>Digite a tarefa e a data de conclusão:</h2>
  
     <form method="POST"> 
         <input type="text" id="tituloTarefa" name="tituloTarefa" placeholder="O que precisa ser feito?" value="{{ tarefa_edicao.titulo if tarefa_edicao else '' }}" required>
