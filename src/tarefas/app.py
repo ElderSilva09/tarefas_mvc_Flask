@@ -7,10 +7,6 @@ app = Flask(__name__)
  
 with app.app_context():
     init_db()
-   
-@app.route('/test')
-def test():
-    return 'Servidor online!'
  
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -20,10 +16,16 @@ def home():
  
         data_corrigida = data_conclusao_form or None
  
-        # Instanciamos uma nova tarefa com os dados recebidos do form
-        tarefa = Tarefa(titulo=titulo_form, data_conclusao=data_corrigida)
+        '''
+        Instanciamos uma nova tarefa com os dados recebidos do form
+        '''
+        tarefa = Tarefa(
+            titulo=titulo_form, data_conclusao=data_corrigida
+            )
         
-        # Salvamos a tarefa no banco
+        '''
+        Salvamos a tarefa no banco
+        '''
         tarefa.salvarTarefa()
  
         return redirect(url_for('home'))
@@ -52,7 +54,9 @@ def editar_tarefa(id):
         data_conclusao_form = request.form['dataConclusao']
         data_corrigida = data_conclusao_form or None
 
-        tarefa = Tarefa(titulo=titulo_form, id=id, data_conclusao=data_corrigida)
+        tarefa = Tarefa(
+            titulo=titulo_form, id=id, data_conclusao=data_corrigida
+        )
         tarefa.atualizarTarefa()
 
         return redirect(url_for('home'))

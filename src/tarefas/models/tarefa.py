@@ -55,7 +55,11 @@ class Tarefa:
                 if isinstance(dados['data_conclusao'], (datetime, date))
                 else dados['data_conclusao']
             )
-            return cls(titulo=dados['titulo_tarefa'], id=dados['id_tarefa'], data_conclusao=data_formatada)
+            return cls(
+                       titulo=dados['titulo_tarefa'], 
+                       id=dados['id_tarefa'], 
+                       data_conclusao=data_formatada
+                       )
         return None
 
     def atualizarTarefa(self):
@@ -67,7 +71,3 @@ class Tarefa:
         
         with Database() as db:
             db.executar(sql, params)
-
-# Área 51 (testes)
-#tarefa = Tarefa('Minha nova tarefa')
-#tarefa.salvarTarefa()
